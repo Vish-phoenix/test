@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Request Account Deletion — Hem Industries</title>
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, Arial, sans-serif; line-height:1.5; padding:24px; max-width:900px; margin:0 auto; color:#111; }
+    header { margin-bottom:20px; }
+    h1 { margin:0 0 6px; font-size:24px; }
+    p.lead { margin:0 0 16px; color:#444; }
+    .card { border:1px solid #e6e6e6; padding:18px; border-radius:8px; margin-bottom:18px; background:#fff; }
+    dl { margin:0; }
+    dt { font-weight:600; margin-top:12px; }
+    dd { margin:4px 0 12px 0; color:#333; }
+    .steps { margin:10px 0 0 0; padding-left:18px; }
+    label { display:block; margin:8px 0 6px; font-weight:600; }
+    input[type="text"], input[type="email"], textarea { width:100%; padding:10px; border:1px solid #d0d0d0; border-radius:6px; }
+    button { background:#0b74de; color:white; padding:10px 14px; border:none; border-radius:6px; cursor:pointer; margin-top:10px; }
+    .muted { color:#666; font-size:14px; }
+    .small { font-size:13px; color:#666; }
+    .contact { margin-top:8px; }
+    footer { margin-top:30px; font-size:13px; color:#666; }
+    .pill { display:inline-block; padding:4px 8px; border-radius:16px; background:#f0f7ff; color:#034ea2; font-weight:600; margin-right:8px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Delete your Hem Industries account</h1>
+    <p class="lead">Use this page to request deletion of your account and associated personal data. We’ll verify your request and permanently remove or anonymize the data described below.</p>
+  </header>
+
+  <section class="card" aria-labelledby="how">
+    <h2 id="how">How to request deletion (3 quick steps)</h2>
+    <ol class="steps">
+      <li><strong>Sign in</strong> to the app with the account you want deleted (helps us verify ownership).</li>
+      <li><strong>Submit the form below</strong> — include the email/username associated with the account and a brief reason. Alternatively, click the <em>email</em> link if you prefer to request deletion by email.</li>
+      <li>We’ll <strong>verify your identity</strong> and confirm the deletion timeline by email. Once verification completes we will start deletion within the timeframe below.</li>
+    </ol>
+
+    <p class="small muted">If you cannot sign in, you can still request deletion by emailing <a href="mailto:support@yourdomain.com?subject=Account%20Deletion%20Request">support@yourdomain.com</a>. We’ll ask for a form of ID or additional verification only when necessary to prevent fraudulent deletion.</p>
+  </section>
+
+  <section class="card" aria-labelledby="form">
+    <h2 id="form">Account deletion request form</h2>
+
+    <!-- NOTE: replace /api/request-delete with your backend endpoint that performs verification & triggers deletion -->
+    <form id="deleteForm" action="/api/request-delete" method="POST">
+      <label for="email">Email address associated with the account</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com" />
+
+      <label for="username">Username (if applicable)</label>
+      <input id="username" name="username" type="text" placeholder="your_username" />
+
+      <label for="reason">Reason for deletion (optional)</label>
+      <textarea id="reason" name="reason" rows="3" placeholder="(optional) Please tell us why you want to delete your account"></textarea>
+
+      <input type="hidden" name="source" value="google_play_delete_url" />
+
+      <button type="submit">Request account deletion</button>
+
+      <p class="small muted contact">If the form does not work, email: <a href="mailto:support@yourdomain.com?subject=Account%20Deletion%20Request">support@yourdomain.com</a></p>
+    </form>
+
+    <script>
+      // Small JS to show friendly confirmation (the real deletion must be handled server-side).
+      document.getElementById('deleteForm').addEventListener('submit', function (e) {
+        // Let the normal POST run to your server. If you don't have server endpoint, you can intercept here and POST to a service.
+        // For UX, show a simple confirmation
+        setTimeout(function(){ alert('Thanks — your deletion request was sent. We will contact you at the email provided within 5 business days.'); }, 200);
+      });
+    </script>
+  </section>
+
+  <section class="card" aria-labelledby="whatdeleted">
+    <h2 id="whatdeleted">What will be deleted — and what we may keep</h2>
+    <dl>
+      <dt>Immediately deleted (user-accessible)</dt>
+      <dd>Account profile (name, email, username), profile photo, user preferences, direct messages and private chat content (unless legally required to keep), and personalized settings.</dd>
+
+      <dt>Deleted after verification / processing</dt>
+      <dd>Uploaded files and media (images, documents), saved payment instruments (note: payment processors may keep limited data for transactional recordkeeping), order history (may be anonymized), and user-generated content where requested.</dd>
+
+      <dt>Data kept / retained for legal or operational reasons</dt>
+      <dd class="small">We may retain:</dd>
+      <dd>- Transaction records and billing logs for financial / legal compliance: <strong>retention: 6 years</strong> (or your local legal requirement).</dd>
+      <dd>- Server logs and backups for security and fraud detection: <strong>retention: up to 90 days</strong> (backups may persist longer in immutable archives but will be rendered inaccessible and masked).</dd>
+      <dd>- Aggregated/anonymized analytics data used for product improvements (non-identifying): <strong>indefinite</strong>.</dd>
+    </dl>
+    <p class="muted small">If you need a tighter retention period for any retained data due to special circumstances, contact us at <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.</p>
+  </section>
+
+  <section class="card" aria-labelledby="timeline">
+    <h2 id="timeline">Verification & deletion timeline</h2>
+    <dl>
+      <dt>Verification</dt>
+      <dd>We will acknowledge receipt within <strong>3 business days</strong> and may ask you to confirm ownership (via email link or a short verification step).</dd>
+
+      <dt>Deletion completion</dt>
+      <dd>After successful verification we will perform deletion within <strong>30 days</strong>. Some data (backups, logs, legal records) may remain as described above.</dd>
+
+      <dt>Final confirmation</dt>
+      <dd>We will send a confirmation email when deletion is complete and include a summary of what was removed.</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <span class="pill">Hem Industries</span>
+    <span class="small">Last updated: <strong>October 30, 2025</strong></span>
+  </footer>
+</body>
+</html>
